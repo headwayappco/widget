@@ -1,1 +1,1 @@
-# react-component
+# Headway widget components
