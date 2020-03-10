@@ -1,0 +1,7 @@
+*.iml
+.idea/
+*.class
+*target*
+.vagrant
+node_modules
+npm-debug.log
