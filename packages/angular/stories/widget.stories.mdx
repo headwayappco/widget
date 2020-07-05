@@ -1,0 +1,68 @@
+import {
+  Meta,
+  Preview,
+  Story,
+  Props,
+  Source,
+  SourceState,
+} from "@storybook/addon-docs/blocks";
+import { moduleMetadata } from "@storybook/angular";
+import { number, select } from "@storybook/addon-knobs";
+//import Logo from './logo';
+import { Headway, HeadwayWidget } from "../src/index";
+import { text, withKnobs } from "@storybook/addon-knobs";
+import { Logo } from "./Logo.ts";
+
+<Meta
+  title="HeadwayWidget"
+  decorators={[
+    withKnobs,
+    moduleMetadata({ declarations: [HeadwayWidget, Logo] }),
+  ]}
+/>
+
+# HeadwayWidget
+
+## Basic usage
+
+The simplest possible usage, just set your _account_ id.
+
+<Preview>
+  <Story name="Basic">
+    {{
+      template:
+        '<headway-widget account="J1LKG7"><logo></logo></headway-widget>',
+      props: () => ({}),
+    }}
+  </Story>
+</Preview>
+
+## Badge position
+
+You can change badge position to one of 9 possible values. Check all of them in the Api reference at the end of this page.
+
+XXX
+
+## Widget position
+
+You can change widget position to one of 6 possible values. Check all of them in the Api reference at the end of this page.
+
+XXX
+
+## External trigger
+
+Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `forId`
+prop to corresponding widget `id`.
+
+XXX
+
+## Handlers
+
+You can add some handlers of Widget actions. Open developer tools, click around widget below and observe
+logged names.
+
+XXX
+
+## Api reference
+
+<Props of={HeadwayWidget} />
