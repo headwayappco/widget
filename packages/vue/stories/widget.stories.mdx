@@ -1,0 +1,29 @@
+import Vue from 'vue';
+import { Meta, Preview, Story, Props, Source, SourceState } from '@storybook/addon-docs/blocks';
+import { text, withKnobs } from '@storybook/addon-knobs';
+import HeadwayWidget from '../src/HeadwayWidget';
+import Logo from './Logo.vue';
+
+<Meta title="HeadwayWidget" decorators={[withKnobs]} />
+
+# HeadwayWidget
+
+## Basic usage
+The simplest possible usage, just set your *account* id.
+
+<Preview>
+    <Story name="Basic">
+        {{template: '<headway-widget account="J1LKG7"><logo></logo></headway-widget>', props: () => ({})}}
+    </Story>
+</Preview>
+
+## Second
+The simplest possible usage, just set your *account* id.
+
+<Preview>
+    <Story name="Second">
+        {{template: '<headway-widget account="J1LKG7"><logo></logo></headway-widget>', props: () => ({})}}
+    </Story>
+</Preview>
+
+<Props of={HeadwayWidget} />

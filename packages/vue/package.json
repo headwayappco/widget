@@ -1,0 +1,31 @@
+{
+  "name": "@headwayapp/vue-widget",
+  "version": "0.0.2",
+  "description": "Headway widget for Vue JS",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "start-storybook",
+    "build": "rollup -c"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "author": "Krzysztof Pniak",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/vue": "^5.3.19",
+    "babel-loader": "^8.1.0",
+    "babel-preset-vue": "^2.0.2",
+    "postcss": "^7.0.26",
+    "rollup": "^1.28.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-vue": "5.1.1",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
