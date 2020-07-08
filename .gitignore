@@ -7,4 +7,4 @@ node_modules
 npm-debug.log
 dist
 storybook-static
-angular/documentation.json
+packages/angular/documentation.json
