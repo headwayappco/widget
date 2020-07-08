@@ -132,7 +132,6 @@ const HeadwayWidget = ({
     let destroy;
     if (window.Headway) {
       destroy = initHeadway();
-      console.log("1");
     } else {
       const head = document.getElementsByTagName("head")[0];
       const script = document.createElement("script");
@@ -141,12 +140,10 @@ const HeadwayWidget = ({
         script.onload = () => {
           const d = initHeadway();
           resolve(d);
-          console.log("2");
         };
       });
 
       destroy = () => {
-        console.log("1");
         p.then((d) => d());
       };
       script.src = "https://cdn.headwayapp.co/widget.js"; // "https://cdn.headwaystaging.com/widget.js"; //;
