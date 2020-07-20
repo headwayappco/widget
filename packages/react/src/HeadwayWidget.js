@@ -89,7 +89,6 @@ const HeadwayWidget = ({
 
   const initHeadway = useCallback(() => {
     const hwConfig = {
-      ...options,
       selector: HeadwayWidgetSelector + `_${id}`,
       account: account || options.account,
       trigger: trigger
@@ -107,6 +106,7 @@ const HeadwayWidget = ({
       badgePosition,
       krzysztof: true,
       styles,
+      ...options,
     };
 
     const widget = window.Headway.getNewWidget();
