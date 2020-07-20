@@ -18,67 +18,120 @@ import HeadwayWidget, { HeadwayWidgetTrigger } from "../src/index";
 
 The simplest possible usage, just set your _account_ id.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Basic">
-    <HeadwayWidget account="J1LKG7">
+    <HeadwayWidget account="J1LKG7" id="widget-basic">
       <Logo />
     </HeadwayWidget>
   </Story>
 </Preview>
+
+```jsx
+<HeadwayWidget account="J1LKG7" id="widget-basic">
+  <Logo />
+</HeadwayWidget>
+```
 
 ## Badge position
 
 You can change badge position to one of 9 possible values. Check all of them in the Api reference at the end of this page.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Badge Position">
-    <HeadwayWidget account="J1LKG7" id="2" badgePosition="center-left">
+    <HeadwayWidget
+      account="J1LKG7"
+      id="widget-badge"
+      badgePosition="center-left"
+    >
       <Logo />
     </HeadwayWidget>
   </Story>
 </Preview>
+
+```jsx
+<HeadwayWidget account="J1LKG7" id="widget-badge" badgePosition="center-left">
+  <Logo />
+</HeadwayWidget>
+```
 
 ## Widget position
 
 You can change widget position to one of 6 possible values. Check all of them in the Api reference at the end of this page.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Widget Position">
-    <HeadwayWidget account="J1LKG7" id="3" position="center-left">
+    <HeadwayWidget account="J1LKG7" id="widget-position" position="center-left">
       <Logo />
     </HeadwayWidget>
   </Story>
 </Preview>
+
+```jsx
+<HeadwayWidget account="J1LKG7" id="widget-badge" badgePosition="center-left">
+  <Logo />
+</HeadwayWidget>
+```
+
+## Self trigger
+
+Widget can be triggered by its children.
+
+<Preview withSource="none">
+  <Story name="Self trigger">
+    <div style={{ display: "flex" }}>
+      <HeadwayWidget account="J1LKG7" trigger>
+        <Logo />
+      </HeadwayWidget>
+    </div>
+  </Story>
+</Preview>
+
+```jsx
+<HeadwayWidget account="J1LKG7" trigger>
+  <Logo />
+</HeadwayWidget>
+```
 
 ## External trigger
 
 Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `forId`
 prop to corresponding widget `id`.
 
-<Preview>
+<Preview withSource="none">
   <Story name="External trigger">
     <div style={{ display: "flex" }}>
-      <HeadwayWidget account="J1LKG7" id="4">
+      <HeadwayWidget account="J1LKG7" id="widget-external-trigger">
         <Logo />
       </HeadwayWidget>
-      <HeadwayWidgetTrigger forId="4">
+      <HeadwayWidgetTrigger forId="widget-external-trigger">
         <button>Trigger</button>
       </HeadwayWidgetTrigger>
     </div>
   </Story>
 </Preview>
 
+```jsx
+<div>
+  <HeadwayWidget account="J1LKG7" id="widget-external-trigger">
+    <Logo />
+  </HeadwayWidget>
+  <HeadwayWidgetTrigger forId="widget-external-trigger">
+    <button>Trigger</button>
+  </HeadwayWidgetTrigger>
+</div>
+```
+
 ## Callbacks
 
 You can add some handlers of Widget actions. Open developer tools, click around widget below and observe
 logged names.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Handlers">
     <div style={{ display: "flex" }}>
       <HeadwayWidget
         account="J1LKG7"
-        id="5"
+        id="widget-callbacks"
         onWidgetReady={() => console.log("Widget is ready")}
         onShowWidget={() => console.log("Widget shown")}
         onReadMore={() => console.log("Read more clicked")}
@@ -91,16 +144,30 @@ logged names.
   </Story>
 </Preview>
 
+```jsx
+<HeadwayWidget
+  account="J1LKG7"
+  id="widget-callbacks"
+  onWidgetReady={() => console.log("Widget is ready")}
+  onShowWidget={() => console.log("Widget shown")}
+  onReadMore={() => console.log("Read more clicked")}
+  onShowDetails={() => console.log("Show more clicked")}
+  onHideWidget={() => console.log("Widget hidden")}
+>
+  <Logo />
+</HeadwayWidget>
+```
+
 ## Translations
 
 You can translate widget labels.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Translations">
     <div style={{ display: "flex" }}>
       <HeadwayWidget
         account="J1LKG7"
-        id="6"
+        id="widget-translations"
         translations={{
           title: "Registro de cambios",
           readMore: "Lee mas",
@@ -117,6 +184,69 @@ You can translate widget labels.
     </div>
   </Story>
 </Preview>
+
+```jsx
+const translations = {
+  title: "Registro de cambios",
+  readMore: "Lee mas",
+  labels: {
+    new: "nuevo",
+    update: "actualizar",
+    improvement: "mejora",
+  },
+  footer: "Lee mas 👉",
+};
+
+return (
+  <HeadwayWidget
+    account="J1LKG7"
+    id="widget-translations"
+    translations={translations}
+  >
+    <Logo />
+  </HeadwayWidget>
+);
+```
+
+## Options
+
+You can pass options in classic way.
+
+<Preview withSource="none">
+  <Story name="Options">
+    <HeadwayWidget
+      account="J1LKG7"
+      id="widget-options"
+      options={{
+        badgePosition: "top-left",
+        callbacks: {
+          onShowWidget: () => {
+            alert("Hello");
+          },
+        },
+      }}
+    >
+      <Logo />
+    </HeadwayWidget>
+  </Story>
+</Preview>
+
+```jsx
+const options = {
+  badgePosition: "top-left",
+  callbacks: {
+    onShowWidget: () => {
+      alert("Hello");
+    },
+  },
+};
+
+return (
+  <HeadwayWidget account="J1LKG7" id="widget-options" options={options}>
+    <Logo />
+  </HeadwayWidget>
+);
+```
 
 ## Api reference
 
