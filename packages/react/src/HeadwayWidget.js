@@ -14,7 +14,7 @@ const HeadwayWidgetTrigger = ({ forId, component, children }) => {
 };
 
 HeadwayWidgetTrigger.defaultProps = {
-  forId: 1,
+  forId: "widget-1",
 };
 
 const parsePosition = (positionText) => {
@@ -261,7 +261,7 @@ HeadwayWidget.propTypes = {
 
 HeadwayWidget.defaultProps = {
   account: "",
-  id: "1",
+  id: "widget-1",
   badgePosition: "bottom-right",
   position: "bottom-right",
   styles: {},
