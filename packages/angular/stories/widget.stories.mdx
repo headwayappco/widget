@@ -27,7 +27,7 @@ import { Logo } from "./Logo.ts";
 
 The simplest possible usage, just set your _account_ id.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Basic">
     {{
       template:
@@ -37,17 +37,49 @@ The simplest possible usage, just set your _account_ id.
   </Story>
 </Preview>
 
+```html
+<headway-widget account="J1LKG7"><logo></logo></headway-widget>
+```
+
 ## Badge position
 
 You can change badge position to one of 9 possible values. Check all of them in the Api reference at the end of this page.
 
-XXX
+<Preview withSource="none">
+  <Story name="Badge Position">
+    {{
+      template: `<headway-widget account="J1LKG7" id="widget-badge"
+      badgePosition="center-left"><logo></logo></headway-widget>`,
+      props: () => ({}),
+    }}
+  </Story>
+</Preview>
+
+```html
+<headway-widget account="J1LKG7" id="widget-badge" badgePosition="center-left">
+  <logo></logo>
+</headway-widget>
+```
 
 ## Widget position
 
 You can change widget position to one of 6 possible values. Check all of them in the Api reference at the end of this page.
 
-XXX
+<Preview withSource="none">
+  <Story name="Widget Position">
+    {{
+      template: `<headway-widget account="J1LKG7" id="widget-badge"
+      position="bottom-left"><logo></logo></headway-widget>`,
+      props: () => ({}),
+    }}
+  </Story>
+</Preview>
+
+```html
+<headway-widget account="J1LKG7" id="widget-badge" position="bottom-right">
+  <logo></logo>
+</headway-widget>
+```
 
 ## External trigger
 
@@ -56,12 +88,90 @@ prop to corresponding widget `id`.
 
 XXX
 
-## Handlers
+## Callbacks
 
 You can add some handlers of Widget actions. Open developer tools, click around widget below and observe
 logged names.
 
-XXX
+<Preview withSource="none">
+  <Story name="Callbacks">
+    {{
+      template: `<headway-widget account="J1LKG7" id="widget-badge"
+      (widgetReady)="log('Widget is ready')"
+      (showWidget)="log('Widget shown')"
+      (readMore)="log('Read more clicked')"
+      (showDetails)="log('Show more clicked')"
+      (hideWidget)="log('Widget hidden')" ><logo></logo></headway-widget>`,
+      props: {
+        log: console.log,
+      },
+    }}
+  </Story>
+</Preview>
+
+```html
+<headway-widget
+  account="J1LKG7"
+  id="widget-handlers"
+  (widgetReady)="log('Widget is ready')"
+  (showWidget)="log('Widget shown')"
+  (readMore)="log('Read more clicked')"
+  (showDetails)="log('Show more clicked')"
+  (hideWidget)="log('Widget hidden')"
+>
+  <logo></logo>
+</headway-widget>
+```
+
+## Translations
+
+You can translate widget labels.
+
+<Preview withSource="none">
+  <Story name="Translations">
+    {{
+      template: `<headway-widget account="J1LKG7" id="widget-translations"
+      [translations]="translations"><logo></logo></headway-widget>`,
+      props: {
+        translations: {
+          title: "Registro de cambios",
+          readMore: "Lee mas",
+          labels: {
+            new: "nuevo",
+            update: "actualizar",
+            improvement: "mejora",
+          },
+          footer: "Lee mas 👉",
+        },
+      },
+    }}
+  </Story>
+</Preview>
+
+```typescript
+@Component({
+  selector: "app",
+  template: `<headway-widget
+    account="J1LKG7"
+    id="widget-translations"
+    [translations]="translations"
+  >
+    <logo></logo>
+  </headway-widget>`,
+})
+export class AppComponent {
+  translations = {
+    title: "Registro de cambios",
+    readMore: "Lee mas",
+    labels: {
+      new: "nuevo",
+      update: "actualizar",
+      improvement: "mejora",
+    },
+    footer: "Lee mas 👉",
+  };
+}
+```
 
 ## Api reference
 
