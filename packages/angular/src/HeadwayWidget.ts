@@ -13,6 +13,15 @@ const HeadwayWidgetSelector = "." + HeadwayWidgetClassName;
 const HeadwayWidgetTriggerClassName = "HW_trigger";
 const HeadwayWidgetTriggerSelector = "." + HeadwayWidgetTriggerClassName;
 
+const parsePosition = (positionText) => {
+  if (positionText.indexOf("-") === -1) {
+    return {};
+  }
+
+  const [y, x] = positionText.split("-");
+  return { x, y };
+};
+
 @Component({
   selector: "headway-widget",
   template: `<div
@@ -25,6 +34,9 @@ const HeadwayWidgetTriggerSelector = "." + HeadwayWidgetTriggerClassName;
 export class HeadwayWidget implements OnInit, OnDestroy {
   @Input() name: string;
   @Input() account: string;
+  @Input() badgePosition = "bottom-right";
+  @Input() position = "bottom-right";
+  @Input() translations = {};
   @Output() widgetReady = new EventEmitter<boolean>();
   @Output() showWidget = new EventEmitter<boolean>();
   @Output() showDetails = new EventEmitter<boolean>();
@@ -45,7 +57,9 @@ export class HeadwayWidget implements OnInit, OnDestroy {
         onHideWidget: () => this.hideWidget.emit(),
       },
       krzysztof: true,
-      badgePosition: "top-right",
+      badgePosition: this.badgePosition,
+      position: parsePosition(this.position),
+      translations: this.translations,
     };
     (this as any).widget = (window as any).Headway.getNewWidget();
 
