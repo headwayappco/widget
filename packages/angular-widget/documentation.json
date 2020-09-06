@@ -1,0 +1,476 @@
+{
+    "pipes": [],
+    "interfaces": [],
+    "injectables": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "HeadwayWidget",
+            "id": "component-HeadwayWidget-a709235d48ba1169ca8399c21bdb5840",
+            "file": "src/HeadwayWidget.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "headway-widget",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div    class=\"{{ headwayWidgetClassName }}\"\n    style=\"position: relative; display: inline-block\"\n  >\n    <ng-content></ng-content>\n  </div>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "account",
+                    "line": 36,
+                    "type": "string"
+                },
+                {
+                    "name": "badgePosition",
+                    "defaultValue": "\"bottom-right\"",
+                    "line": 37
+                },
+                {
+                    "name": "name",
+                    "line": 35,
+                    "type": "string"
+                },
+                {
+                    "name": "position",
+                    "defaultValue": "\"bottom-right\"",
+                    "line": 38
+                },
+                {
+                    "name": "translations",
+                    "defaultValue": "{}",
+                    "line": 39
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "hideWidget",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "line": 44,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "readMore",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "line": 43,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "showDetails",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "line": 42,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "showWidget",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "line": 41,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "widgetReady",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "line": 40,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "headwayWidgetClassName",
+                    "defaultValue": "HeadwayWidgetClassName",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 45
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "initHeadway",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 47
+                },
+                {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 69
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 73
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import {\n  Component,\n  NgModule,\n  Input,\n  Output,\n  EventEmitter,\n  OnInit,\n  OnDestroy,\n} from \"@angular/core\";\n\nconst HeadwayWidgetClassName = \"HW_widget_component\";\nconst HeadwayWidgetSelector = \".\" + HeadwayWidgetClassName;\nconst HeadwayWidgetTriggerClassName = \"HW_trigger\";\nconst HeadwayWidgetTriggerSelector = \".\" + HeadwayWidgetTriggerClassName;\n\nconst parsePosition = (positionText) => {\n  if (positionText.indexOf(\"-\") === -1) {\n    return {};\n  }\n\n  const [y, x] = positionText.split(\"-\");\n  return { x, y };\n};\n\n@Component({\n  selector: \"headway-widget\",\n  template: `<div\n    class=\"{{ headwayWidgetClassName }}\"\n    style=\"position: relative; display: inline-block\"\n  >\n    <ng-content></ng-content>\n  </div>`,\n})\nexport class HeadwayWidget implements OnInit, OnDestroy {\n  @Input() name: string;\n  @Input() account: string;\n  @Input() badgePosition = \"bottom-right\";\n  @Input() position = \"bottom-right\";\n  @Input() translations = {};\n  @Output() widgetReady = new EventEmitter<boolean>();\n  @Output() showWidget = new EventEmitter<boolean>();\n  @Output() showDetails = new EventEmitter<boolean>();\n  @Output() readMore = new EventEmitter<boolean>();\n  @Output() hideWidget = new EventEmitter<boolean>();\n  headwayWidgetClassName = HeadwayWidgetClassName;\n\n  initHeadway() {\n    const hwConfig = {\n      selector: HeadwayWidgetSelector,\n      account: this.account,\n      trigger: HeadwayWidgetSelector,\n      callbacks: {\n        onWidgetReady: () => this.widgetReady.emit(),\n        onShowWidget: () => this.showWidget.emit(),\n        onShowDetails: () => this.showDetails.emit(),\n        onReadMore: () => this.readMore.emit(),\n        onHideWidget: () => this.hideWidget.emit(),\n      },\n      krzysztof: true,\n      badgePosition: this.badgePosition,\n      position: parsePosition(this.position),\n      translations: this.translations,\n    };\n    (this as any).widget = (window as any).Headway.getNewWidget();\n\n    (this as any).widget.init(hwConfig);\n  }\n\n  ngOnDestroy(): void {\n    (this as any).widget.destroy();\n  }\n\n  ngOnInit(): void {\n    if ((window as any).Headway) {\n      this.initHeadway();\n    } else {\n      const head = document.getElementsByTagName(\"head\")[0];\n      const script = document.createElement(\"script\");\n      script.type = \"text/javascript\";\n      script.onload = () => {\n        this.initHeadway();\n      };\n      script.src = \"https://cdn.headwayapp.co/widget.js\";\n      head.appendChild(script);\n    }\n  }\n}\n\n@NgModule({\n  imports: [],\n  exports: [HeadwayWidget],\n  declarations: [HeadwayWidget],\n})\nexport class Headway {}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "implements": [
+                "OnInit",
+                "OnDestroy"
+            ]
+        },
+        {
+            "name": "Logo",
+            "id": "component-Logo-1a56aa29e061ee4e4fe71a29eef27237",
+            "file": "stories/Logo.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "logo",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div style=\"font-size: 32px;font-weight: bold; font-family: Helvetica; background: #FFB800; color: #223CFF; padding: 20px\">Your logo</div>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import {Component, NgModule, Input, Output, EventEmitter, OnInit, OnDestroy} from '@angular/core';\n\nconst HeadwayWidgetClassName = \"HW_widget_component\";\nconst HeadwayWidgetSelector = \".\" + HeadwayWidgetClassName;\nconst HeadwayWidgetTriggerClassName = \"HW_trigger\";\nconst HeadwayWidgetTriggerSelector = \".\" + HeadwayWidgetTriggerClassName;\n\n@Component({\n  selector: 'logo',\n  template: `<div style=\"font-size: 32px;font-weight: bold; font-family: Helvetica; background: #FFB800; color: #223CFF; padding: 20px\">Your logo</div>`\n})\nexport class Logo {\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": ""
+        }
+    ],
+    "modules": [
+        {
+            "name": "Headway",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "HeadwayWidget"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "HeadwayWidget"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "HeadwayWidgetClassName",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/HeadwayWidget.ts",
+                "type": "string",
+                "defaultValue": "\"HW_widget_component\""
+            },
+            {
+                "name": "HeadwayWidgetClassName",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/Logo.ts",
+                "type": "string",
+                "defaultValue": "\"HW_widget_component\""
+            },
+            {
+                "name": "HeadwayWidgetSelector",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/HeadwayWidget.ts",
+                "type": "",
+                "defaultValue": "\".\" + HeadwayWidgetClassName"
+            },
+            {
+                "name": "HeadwayWidgetSelector",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/Logo.ts",
+                "type": "",
+                "defaultValue": "\".\" + HeadwayWidgetClassName"
+            },
+            {
+                "name": "HeadwayWidgetTriggerClassName",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/HeadwayWidget.ts",
+                "type": "string",
+                "defaultValue": "\"HW_trigger\""
+            },
+            {
+                "name": "HeadwayWidgetTriggerClassName",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/Logo.ts",
+                "type": "string",
+                "defaultValue": "\"HW_trigger\""
+            },
+            {
+                "name": "HeadwayWidgetTriggerSelector",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/HeadwayWidget.ts",
+                "type": "",
+                "defaultValue": "\".\" + HeadwayWidgetTriggerClassName"
+            },
+            {
+                "name": "HeadwayWidgetTriggerSelector",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "stories/Logo.ts",
+                "type": "",
+                "defaultValue": "\".\" + HeadwayWidgetTriggerClassName"
+            },
+            {
+                "name": "parsePosition",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/HeadwayWidget.ts",
+                "type": "",
+                "defaultValue": "(positionText) => {\n  if (positionText.indexOf(\"-\") === -1) {\n    return {};\n  }\n\n  const [y, x] = positionText.split(\"-\");\n  return { x, y };\n}"
+            }
+        ],
+        "functions": [],
+        "typealiases": [],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/HeadwayWidget.ts": [
+                {
+                    "name": "HeadwayWidgetClassName",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/HeadwayWidget.ts",
+                    "type": "string",
+                    "defaultValue": "\"HW_widget_component\""
+                },
+                {
+                    "name": "HeadwayWidgetSelector",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/HeadwayWidget.ts",
+                    "type": "",
+                    "defaultValue": "\".\" + HeadwayWidgetClassName"
+                },
+                {
+                    "name": "HeadwayWidgetTriggerClassName",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/HeadwayWidget.ts",
+                    "type": "string",
+                    "defaultValue": "\"HW_trigger\""
+                },
+                {
+                    "name": "HeadwayWidgetTriggerSelector",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/HeadwayWidget.ts",
+                    "type": "",
+                    "defaultValue": "\".\" + HeadwayWidgetTriggerClassName"
+                },
+                {
+                    "name": "parsePosition",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/HeadwayWidget.ts",
+                    "type": "",
+                    "defaultValue": "(positionText) => {\n  if (positionText.indexOf(\"-\") === -1) {\n    return {};\n  }\n\n  const [y, x] = positionText.split(\"-\");\n  return { x, y };\n}"
+                }
+            ],
+            "stories/Logo.ts": [
+                {
+                    "name": "HeadwayWidgetClassName",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/Logo.ts",
+                    "type": "string",
+                    "defaultValue": "\"HW_widget_component\""
+                },
+                {
+                    "name": "HeadwayWidgetSelector",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/Logo.ts",
+                    "type": "",
+                    "defaultValue": "\".\" + HeadwayWidgetClassName"
+                },
+                {
+                    "name": "HeadwayWidgetTriggerClassName",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/Logo.ts",
+                    "type": "string",
+                    "defaultValue": "\"HW_trigger\""
+                },
+                {
+                    "name": "HeadwayWidgetTriggerSelector",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "stories/Logo.ts",
+                    "type": "",
+                    "defaultValue": "\".\" + HeadwayWidgetTriggerClassName"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {}
+    },
+    "routes": [],
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/HeadwayWidget.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeadwayWidget",
+                "coveragePercent": 0,
+                "coverageCount": "0/15",
+                "status": "low"
+            },
+            {
+                "filePath": "src/HeadwayWidget.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeadwayWidgetClassName",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/HeadwayWidget.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeadwayWidgetSelector",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/HeadwayWidget.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeadwayWidgetTriggerClassName",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/HeadwayWidget.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeadwayWidgetTriggerSelector",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/HeadwayWidget.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "parsePosition",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/Logo.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Logo",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/Logo.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeadwayWidgetClassName",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/Logo.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeadwayWidgetSelector",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/Logo.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeadwayWidgetTriggerClassName",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "stories/Logo.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HeadwayWidgetTriggerSelector",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}
