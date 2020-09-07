@@ -1,5 +1,5 @@
 <style>
-  :host {
+  #app {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 14px;
     color: #333;
@@ -8,12 +8,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1 {
     margin: 8px 0;
   }
 
@@ -34,10 +29,6 @@
     font-weight: 600;
   }
 
-  .toolbar img {
-    margin: 0 16px;
-  }
-
   .content {
     display: flex;
     margin: 82px auto 32px;
@@ -45,17 +36,6 @@
     max-width: 960px;
     flex-direction: column;
     align-items: center;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
   }
 
   svg#clouds {
@@ -68,53 +48,54 @@
 
 </style>
 
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <div style="margin: 16px">
-  <headway-widget account="J1LKG7">
-    <svg width="30px" height="30px" viewBox="0 0 44 44" version="1.1">
-        <defs>
-          <linearGradient x1="50%" y1="-1.11022302e-14%" x2="50%" y2="100%" id="lg-1">
-            <stop stop-color="#32E7F9" offset="0%"></stop>
-            <stop stop-color="#17CAF0" offset="100%"></stop>
-          </linearGradient>
-          <linearGradient x1="3.061617e-15%" y1="50%" x2="100%" y2="50%" id="lg-2">
-            <stop stop-color="#FFC505" offset="0%"></stop>
-            <stop stop-color="#FFB801" offset="100%"></stop>
-          </linearGradient>
-          <linearGradient x1="3.061617e-15%" y1="50%" x2="100%" y2="50%" id="lg-3">
-            <stop stop-color="#FF4772" offset="0%"></stop>
-            <stop stop-color="#FF4422" offset="97.8117028%"></stop>
-          </linearGradient>
-          <linearGradient x1="3.061617e-15%" y1="50%" x2="100%" y2="50%" id="lg-4">
-            <stop stop-color="#9D02F9" offset="0%"></stop>
-            <stop stop-color="#6301F0" offset="100%"></stop>
-          </linearGradient>
-          <linearGradient x1="50%" y1="0%" x2="50%" y2="98.1684471%" id="lg-5">
-            <stop stop-color="#3B29F6" offset="0%"></stop>
-            <stop stop-color="#6302F0" offset="100%"></stop>
-          </linearGradient>
-          <linearGradient x1="3.061617e-15%" y1="50%" x2="100%" y2="50%" id="lg-6">
-            <stop stop-color="#D793FF" offset="0%"></stop>
-            <stop stop-color="#AE5AFF" offset="100%"></stop>
-          </linearGradient>
-        </defs>
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g>
+<div id="app">
+  <div class="toolbar" role="banner">
+    <div style="margin: 16px">
+    <headway-widget account="J1LKG7">
+      <svg width="30px" height="30px" viewBox="0 0 44 44" version="1.1">
+          <defs>
+            <linearGradient x1="50%" y1="-1.11022302e-14%" x2="50%" y2="100%" id="lg-1">
+              <stop stop-color="#32E7F9" offset="0%"></stop>
+              <stop stop-color="#17CAF0" offset="100%"></stop>
+            </linearGradient>
+            <linearGradient x1="3.061617e-15%" y1="50%" x2="100%" y2="50%" id="lg-2">
+              <stop stop-color="#FFC505" offset="0%"></stop>
+              <stop stop-color="#FFB801" offset="100%"></stop>
+            </linearGradient>
+            <linearGradient x1="3.061617e-15%" y1="50%" x2="100%" y2="50%" id="lg-3">
+              <stop stop-color="#FF4772" offset="0%"></stop>
+              <stop stop-color="#FF4422" offset="97.8117028%"></stop>
+            </linearGradient>
+            <linearGradient x1="3.061617e-15%" y1="50%" x2="100%" y2="50%" id="lg-4">
+              <stop stop-color="#9D02F9" offset="0%"></stop>
+              <stop stop-color="#6301F0" offset="100%"></stop>
+            </linearGradient>
+            <linearGradient x1="50%" y1="0%" x2="50%" y2="98.1684471%" id="lg-5">
+              <stop stop-color="#3B29F6" offset="0%"></stop>
+              <stop stop-color="#6302F0" offset="100%"></stop>
+            </linearGradient>
+            <linearGradient x1="3.061617e-15%" y1="50%" x2="100%" y2="50%" id="lg-6">
+              <stop stop-color="#D793FF" offset="0%"></stop>
+              <stop stop-color="#AE5AFF" offset="100%"></stop>
+            </linearGradient>
+          </defs>
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g>
-              <rect fill="url(#lg-1)" x="0" y="0" width="10" height="18" rx="5"></rect>
-              <rect fill="url(#lg-2)" x="0" y="19" width="10" height="14" rx="5"></rect>
-              <rect fill="url(#lg-3)" x="0" y="34" width="10" height="10" rx="5"></rect>
-              <rect fill="url(#lg-4)" x="34" y="0" width="10" height="27" rx="5"></rect>
-              <rect fill="url(#lg-5)" x="34" y="28" width="10" height="16" rx="5"></rect>
-              <rect fill="url(#lg-6)" x="12" y="18" width="20" height="10" rx="5"></rect>
+              <g>
+                <rect fill="url(#lg-1)" x="0" y="0" width="10" height="18" rx="5"></rect>
+                <rect fill="url(#lg-2)" x="0" y="19" width="10" height="14" rx="5"></rect>
+                <rect fill="url(#lg-3)" x="0" y="34" width="10" height="10" rx="5"></rect>
+                <rect fill="url(#lg-4)" x="34" y="0" width="10" height="27" rx="5"></rect>
+                <rect fill="url(#lg-5)" x="34" y="28" width="10" height="16" rx="5"></rect>
+                <rect fill="url(#lg-6)" x="12" y="18" width="20" height="10" rx="5"></rect>
+              </g>
             </g>
           </g>
-        </g>
-      </svg>
-  </headway-widget>
-    </div>
-  <span>Headway demo app!</span>
+        </svg>
+    </headway-widget>
+      </div>
+    <span>Headway demo app!</span>
+  </div>
 </div>
 
 <div class="content" role="main">
