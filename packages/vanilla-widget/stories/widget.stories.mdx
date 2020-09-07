@@ -1,0 +1,97 @@
+import Vue from "vue";
+import {
+  Meta,
+  Preview,
+  Story,
+  Props,
+  Source,
+  SourceState,
+} from "@storybook/addon-docs/blocks";
+import { text, withKnobs } from "@storybook/addon-knobs";
+import HeadwayWidget from "../src/HeadwayWidget";
+import Logo from "./Logo.vue";
+
+<Meta title="HeadwayWidget" decorators={[withKnobs]} />
+
+# HeadwayWidget
+
+## Basic usage
+
+The simplest possible usage, just set your _account_ id.
+
+<Preview>
+  <Story name="Basic">
+    {{
+      template:
+        '<headway-widget account="J1LKG7"><logo></logo></headway-widget>',
+      props: () => ({}),
+    }}
+  </Story>
+</Preview>
+
+## Badge position
+
+You can change badge position to one of 9 possible values. Check all of them in the Api reference at the end of this page.
+
+<Preview>
+  <Story name="Badge Position">
+    {{
+      template:
+        '<headway-widget account="J1LKG7" id="2" badgePosition="center-left"><logo></logo></headway-widget>',
+      props: () => ({}),
+    }}
+  </Story>
+</Preview>
+
+## Widget position
+
+You can change widget position to one of 6 possible values. Check all of them in the Api reference at the end of this page.
+
+<Preview>
+  <Story name="Widget Position">
+    {{
+      template:
+        '<headway-widget account="J1LKG7" id="3" position="center-left"><logo></logo></headway-widget>',
+      props: () => ({}),
+    }}
+  </Story>
+</Preview>
+
+## External trigger
+
+Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `forId`
+prop to corresponding widget `id`.
+
+<Preview>
+  <Story name="External trigger">
+    {{
+      template: `<div  style="display: flex">
+            <headway-widget account="J1LKG7" id="4">
+                <logo></logo>
+            </headway-widget>
+            <headway-widget-trigger forId="4">
+                <button>Trigger</button>
+            </headway-widget-trigger>
+        </div>`,
+      props: () => ({}),
+    }}
+  </Story>
+</Preview>
+
+## Callbacks
+
+You can add some handlers of Widget actions. Open developer tools, click around widget below and observe
+logged names.
+
+<Preview>
+  <Story name="Callbacks">
+    {{
+      template: `<headway-widget account="J1LKG7" id="5">
+                <logo></logo>
+            </headway-widget>`,
+      props: () => ({}),
+    }}
+  </Story>
+</Preview>
+
+<Props of={HeadwayWidget} />
