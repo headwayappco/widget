@@ -1,0 +1,28 @@
+{
+  "name": "react-demo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "preinstall": "(cd ../../packages/react-widget && yarn && yarn build)"
+  },
+  "dependencies": {
+    "@headwayapp/react-widget": "link:../../packages/react-widget",
+    "react-scripts": "3.4.3",
+    "react": "link:../../packages/react-widget/node_modules/react",
+    "react-dom": "link:../../packages/react-widget/node_modules/react-dom"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

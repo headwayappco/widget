@@ -1,0 +1,45 @@
+{
+  "name": "@headwayapp/react-widget",
+  "version": "0.0.2",
+  "description": "Headway widget for React JS",
+  "main": "./dist/bundle.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "pack:rename": "(cd output/ && mv \"$(npm pack ../ | tail -n 1)\" package.tgz)"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "author": "Krzysztof Pniak",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-docs": "^5.3.18",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/react": "^5.3.18",
+    "babel-loader": "^8.1.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "rollup": "^1.28.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "typescript": "^3.8.3",
+    "core-js": "2",
+    "metrohash": "^2.6.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  }
+}
