@@ -16,7 +16,7 @@ const config = function (mode) {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['env']
+                        presets: ['@babel/preset-env']
                     }
                 }
             },
@@ -35,7 +35,7 @@ const config = function (mode) {
         ]
         },
         output: {
-            path: path.resolve(__dirname, 'public/bundle/'),
+            path: path.resolve(__dirname, 'public/'),
             filename: 'bundle.js',
             publicPath: '/',
         },

@@ -8,10 +8,34 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC" rel="stylesheet">
-  <script src="bundle/bundle.js"></script>
+  <base href="/" />
 </head>
 <body>
 <!-- Add your site or application content here -->
+<h1>Simple template</h1>
+
+  <template id="my-paragraph">
+    <style>
+      p {
+        color: white;
+        background-color: #666;
+        padding: 5px;
+      }
+    </style>
+    <p><slot name="my-text">My default text</slot></p>
+  </template>
+
+  <my-paragraph>
+    <span slot="my-text">Let's have some different text!</span>
+  </my-paragraph>
+
+  <my-paragraph>
+    <ul slot="my-text">
+      <li>Let's have some different text!</li>
+      <li>In a list!!</li>
+    </ul>
+  </my-paragraph>
   <div id="root"></div>
+<script src="bundle.js"></script>
 </body>
 </html>

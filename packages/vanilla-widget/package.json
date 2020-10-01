@@ -5,7 +5,9 @@
   "main": "./dist/bundle.js",
   "scripts": {
     "dev": "start-storybook",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "files": [
     "dist/*"
@@ -15,12 +17,17 @@
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@rollup/plugin-buble": "^0.21.3",
+    "@storybook/addon-actions": "^6.0.22",
     "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-essentials": "^6.0.22",
     "@storybook/addon-knobs": "^5.3.19",
-    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addon-links": "^6.0.22",
+    "@storybook/html": "^6.0.22",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
+    "react-is": "^16.13.1",
     "rollup": "^1.28.0",
     "rollup-plugin-commonjs": "^10.1.0"
-  }
+  },
+  "dependencies": {}
 }

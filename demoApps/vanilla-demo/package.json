@@ -14,14 +14,13 @@
     "@headwayapp/vanilla-widget": "link:../../packages/vanilla-widget"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.0",
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^2.0.0",
+    "style-loader": "^0.23.0",
     "webpack": "^4.16.0",
     "webpack-cli": "^3.0.0",
-    "webpack-dev-server": "^3.1.0",
-    "css-loader": "^2.0.0",
-    "style-loader": "^0.23.0"
+    "webpack-dev-server": "^3.1.0"
   }
 }
