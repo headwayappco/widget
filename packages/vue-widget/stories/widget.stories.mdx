@@ -9,7 +9,6 @@ import {
 } from "@storybook/addon-docs/blocks";
 import { text, withKnobs } from "@storybook/addon-knobs";
 import HeadwayWidget from "../src/HeadwayWidget";
-import Logo from "./Logo.vue";
 
 <Meta title="HeadwayWidget" decorators={[withKnobs]} />
 
@@ -24,7 +23,6 @@ The simplest possible usage, just set your _account_ id.
     {{
       template:
         '<headway-widget account="J1LKG7"><logo></logo></headway-widget>',
-      props: () => ({}),
     }}
   </Story>
 </Preview>
@@ -38,7 +36,6 @@ You can change badge position to one of 9 possible values. Check all of them in 
     {{
       template:
         '<headway-widget account="J1LKG7" id="2" badgePosition="center-left"><logo></logo></headway-widget>',
-      props: () => ({}),
     }}
   </Story>
 </Preview>
@@ -52,7 +49,6 @@ You can change widget position to one of 6 possible values. Check all of them in
     {{
       template:
         '<headway-widget account="J1LKG7" id="3" position="center-left"><logo></logo></headway-widget>',
-      props: () => ({}),
     }}
   </Story>
 </Preview>
@@ -65,7 +61,7 @@ prop to corresponding widget `id`.
 <Preview>
   <Story name="External trigger">
     {{
-      template: `<div  style="display: flex">
+      template: `<div style="display: flex">
             <headway-widget account="J1LKG7" id="4">
                 <logo></logo>
             </headway-widget>
@@ -73,7 +69,6 @@ prop to corresponding widget `id`.
                 <button>Trigger</button>
             </headway-widget-trigger>
         </div>`,
-      props: () => ({}),
     }}
   </Story>
 </Preview>
@@ -89,7 +84,6 @@ logged names.
       template: `<headway-widget account="J1LKG7" id="5">
                 <logo></logo>
             </headway-widget>`,
-      props: () => ({}),
     }}
   </Story>
 </Preview>
