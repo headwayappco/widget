@@ -75,6 +75,7 @@ export default {
           onHideWidget: () => this.$emit("hideWidget"),
         },
         krzysztof: true,
+        translations: this.translations,
         badgePosition: this.badgePosition,
       };
       const w = window.Headway.getNewWidget();

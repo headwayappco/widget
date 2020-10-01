@@ -88,4 +88,55 @@ logged names.
   </Story>
 </Preview>
 
+## Translations
+
+You can translate widget labels.
+
+<Preview withSource="none">
+  <Story name="Translations">
+    {{
+      template: `<headway-widget account="J1LKG7" id="translations" v-bind:translations="translations">
+                <logo></logo>
+            </headway-widget>`,
+      data: () => ({
+        translations: {
+          title: "Registro de cambios",
+          readMore: "Lee mas",
+          labels: {
+            new: "nuevo",
+            update: "actualizar",
+            improvement: "mejora",
+          },
+          footer: "Lee mas 👉",
+        }
+      })
+    }}
+  </Story>
+</Preview>
+
+```jsx
+const translations = {
+  title: "Registro de cambios",
+  readMore: "Lee mas",
+  labels: {
+    new: "nuevo",
+    update: "actualizar",
+    improvement: "mejora",
+  },
+  footer: "Lee mas 👉",
+};
+
+return (
+  <HeadwayWidget
+    account="J1LKG7"
+    id="widget-translations"
+    translations={translations}
+  >
+    <Logo />
+  </HeadwayWidget>
+);
+```
+
+## Api reference
+
 <Props of={HeadwayWidget} />
