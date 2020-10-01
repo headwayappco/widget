@@ -2,7 +2,7 @@
   <div
     v-bind:is="component"
     ref="root"
-    v-bind:class="className"
+    v-bind:class="cName"
     style="position: relative; display: inline-block;"
   >
     <!-- @slot Use this slot header -->
@@ -11,12 +11,17 @@
 </template>
 
 <script>
-const HeadwayWidgetClassName = "headway-widget";
+const HeadwayWidgetClassName = "HW_widget_component";
 const HeadwayWidgetSelector = "." + HeadwayWidgetClassName;
+const HeadwayWidgetTriggerClassName = "HW_trigger";
+const HeadwayWidgetTriggerSelector = "." + HeadwayWidgetTriggerClassName;
 
 export default {
   name: "headway-widget",
   props: {
+    id: {
+      type: String,
+    },
     /**
      * Success event.
      *
@@ -37,16 +42,26 @@ export default {
       type: String,
       default: "bottom-right",
     },
+    translations: {
+      type: Object,
+      default: () => ({}),
+    },
+    options: {
+      type: Object,
+      default: () => ({}),
+    },
   },
-  data: () => ({
-    className: HeadwayWidgetClassName,
+  data: (self) => console.log(self.id) || ({
+    cName: HeadwayWidgetClassName  + `_${self.id}`,
   }),
   methods: {
     initHeadway() {
       const hwConfig = {
-        selector: HeadwayWidgetSelector,
+        selector: HeadwayWidgetSelector + `_${this.id}`,
         account: this.account,
-        trigger: HeadwayWidgetSelector,
+        trigger: this.trigger
+        ? HeadwayWidgetSelector + `_${this.id}`
+        : this.options.trigger || HeadwayWidgetTriggerSelector + `_${this.id}`,
         callbacks: {
           onWidgetReady: () => {
             /**
