@@ -81,9 +81,34 @@ logged names.
 <Preview>
   <Story name="Callbacks">
     {{
-      template: `<headway-widget account="J1LKG7" id="5">
+      template: `<headway-widget
+        account="J1LKG7"
+        id="callbacks"
+        v-on:widgetReady="widgetReady"
+        v-on:showWidget="showWidget"
+        v-on:showDetails="showDetails"
+        v-on:readMore="readMore"
+        v-on:hideWidget="hideWidget"
+        >
                 <logo></logo>
-            </headway-widget>`,
+        </headway-widget>`,
+      methods: {
+        widgetReady: () => {
+          console.log('widgetReady');
+        },
+        showWidget: () => {
+          console.log('showWidget');
+        },
+        showDetails: () => {
+          console.log('showDetails');
+        },
+        readMore: () => {
+          console.log('readMore');
+        },
+        hideWidget: () => {
+          console.log('hideWidget');
+        },
+      }
     }}
   </Story>
 </Preview>
