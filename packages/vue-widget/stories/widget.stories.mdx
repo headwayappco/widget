@@ -18,7 +18,7 @@ import HeadwayWidget from "../src/HeadwayWidget";
 
 The simplest possible usage, just set your _account_ id.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Basic">
     {{
       template:
@@ -27,38 +27,102 @@ The simplest possible usage, just set your _account_ id.
   </Story>
 </Preview>
 
+```html
+<template>
+  <div>
+    <headway-widget account="J1LKG7">Logo</headway-widget>
+  </div>
+</template>
+
+<script>
+  import { HeadwayWidget } from "@headwayapp/vue-widget";
+
+  export default {
+    name: "App",
+    components: {
+      "headway-widget": HeadwayWidget,
+    },
+  };
+</script>
+```
+
 ## Badge position
 
 You can change badge position to one of 9 possible values. Check all of them in the Api reference at the end of this page.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Badge Position">
     {{
       template:
-        '<headway-widget account="J1LKG7" id="2" badgePosition="center-left"><logo></logo></headway-widget>',
+        '<headway-widget account="J1LKG7" id="widget-badge-position" badgePosition="center-left"><logo></logo></headway-widget>',
     }}
   </Story>
 </Preview>
+
+```html
+<template>
+  <div>
+    <headway-widget
+      account="J1LKG7"
+      id="widget-badge-position"
+      badgePosition="center-left"
+      >Logo</headway-widget
+    >
+  </div>
+</template>
+
+<script>
+  import { HeadwayWidget } from "@headwayapp/vue-widget";
+
+  export default {
+    name: "App",
+    components: {
+      "headway-widget": HeadwayWidget,
+    },
+  };
+</script>
+```
 
 ## Widget position
 
 You can change widget position to one of 6 possible values. Check all of them in the Api reference at the end of this page.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Widget Position">
     {{
       template:
-        '<headway-widget account="J1LKG7" id="3" position="center-left"><logo></logo></headway-widget>',
+        '<headway-widget account="J1LKG7" id="widget-position" position="center-left"><logo></logo></headway-widget>',
     }}
   </Story>
 </Preview>
+
+```html
+<template>
+  <div>
+    <headway-widget account="J1LKG7" position="center-left"
+      >Logo</headway-widget
+    >
+  </div>
+</template>
+
+<script>
+  import { HeadwayWidget } from "@headwayapp/vue-widget";
+
+  export default {
+    name: "App",
+    components: {
+      "headway-widget": HeadwayWidget,
+    },
+  };
+</script>
+```
 
 ## External trigger
 
 Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `forId`
 prop to corresponding widget `id`.
 
-<Preview>
+<Preview withSource="none">
   <Story name="External trigger">
     {{
       template: `<div style="display: flex">
@@ -73,12 +137,37 @@ prop to corresponding widget `id`.
   </Story>
 </Preview>
 
+```html
+<template>
+  <div>
+    <headway-widget account="J1LKG7" position="center-left" id="idOfYourChoice"
+      >Logo</headway-widget
+    >
+    <headway-widget-trigger forId="idOfYourChoice">
+      <button>Trigger</button>
+    </headway-widget-trigger>
+  </div>
+</template>
+
+<script>
+  import { HeadwayWidget, HeadwayWidgetTrigger } from "@headwayapp/vue-widget";
+
+  export default {
+    name: "App",
+    components: {
+      "headway-widget": HeadwayWidget,
+      "headway-widget-trigger": HeadwayWidgetTrigger,
+    },
+  };
+</script>
+```
+
 ## Callbacks
 
 You can add some handlers of Widget actions. Open developer tools, click around widget below and observe
 logged names.
 
-<Preview>
+<Preview withSource="none">
   <Story name="Callbacks">
     {{
       template: `<headway-widget
@@ -94,24 +183,69 @@ logged names.
         </headway-widget>`,
       methods: {
         widgetReady: () => {
-          console.log('widgetReady');
+          console.log("widgetReady");
         },
         showWidget: () => {
-          console.log('showWidget');
+          console.log("showWidget");
         },
         showDetails: () => {
-          console.log('showDetails');
+          console.log("showDetails");
         },
         readMore: () => {
-          console.log('readMore');
+          console.log("readMore");
         },
         hideWidget: () => {
-          console.log('hideWidget');
+          console.log("hideWidget");
         },
-      }
+      },
     }}
   </Story>
 </Preview>
+
+```html
+<template>
+  <div>
+    <headway-widget
+      account="J1LKG7"
+      v-on:widgetReady="widgetReady"
+      v-on:showWidget="showWidget"
+      v-on:showDetails="showDetails"
+      v-on:readMore="readMore"
+      v-on:hideWidget="hideWidget"
+    >
+      Logo
+    </headway-widget>
+  </div>
+</template>
+
+<script>
+  import { HeadwayWidget } from "@headwayapp/vue-widget";
+
+  export default {
+    name: "App",
+    components: {
+      "headway-widget": HeadwayWidget,
+    },
+    methods: {
+      widgetReady: () => {
+        console.log("widgetReady");
+      },
+      showWidget: () => {
+        console.log("showWidget");
+      },
+      showDetails: () => {
+        console.log("showDetails");
+      },
+      readMore: () => {
+        console.log("readMore");
+      },
+      hideWidget: () => {
+        console.log("hideWidget");
+      },
+    },
+  };
+</script>
+```
 
 ## Translations
 
@@ -120,7 +254,7 @@ You can translate widget labels.
 <Preview withSource="none">
   <Story name="Translations">
     {{
-      template: `<headway-widget account="J1LKG7" id="translations" v-bind:translations="translations">
+      template: `<headway-widget account="J1LKG7" id="widget-translations" v-bind:translations="translations">
                 <logo></logo>
             </headway-widget>`,
       data: () => ({
@@ -133,33 +267,98 @@ You can translate widget labels.
             improvement: "mejora",
           },
           footer: "Lee mas 👉",
-        }
-      })
+        },
+      }),
     }}
   </Story>
 </Preview>
 
-```jsx
-const translations = {
-  title: "Registro de cambios",
-  readMore: "Lee mas",
-  labels: {
-    new: "nuevo",
-    update: "actualizar",
-    improvement: "mejora",
-  },
-  footer: "Lee mas 👉",
-};
+```html
+<template>
+  <div>
+    <headway-widget account="J1LKG7" v-bind:translations="translations">
+      Logo
+    </headway-widget>
+  </div>
+</template>
 
-return (
-  <HeadwayWidget
-    account="J1LKG7"
-    id="widget-translations"
-    translations={translations}
-  >
-    <Logo />
-  </HeadwayWidget>
-);
+<script>
+  import { HeadwayWidget } from "@headwayapp/vue-widget";
+
+  export default {
+    name: "App",
+    components: {
+      "headway-widget": HeadwayWidget,
+    },
+    data: () => ({
+      translations: {
+        title: "Registro de cambios",
+        readMore: "Lee mas",
+        labels: {
+          new: "nuevo",
+          update: "actualizar",
+          improvement: "mejora",
+        },
+        footer: "Lee mas 👉",
+      },
+    }),
+  };
+</script>
+```
+
+## Options
+
+You can pass options in a classic way.
+
+<Preview withSource="none">
+  <Story name="Options">
+    {{
+      template: `<headway-widget account="J1LKG7" id="widget-options" v-bind:options="options">
+                <logo></logo>
+            </headway-widget>`,
+      data: () => ({
+        options: {
+          badgePosition: "top-left",
+          callbacks: {
+            onShowWidget: () => {
+              alert("Hello");
+            },
+          },
+        },
+      }),
+    }}
+  </Story>
+</Preview>
+
+```html
+<template>
+  <div>
+    <headway-widget account="J1LKG7" v-bind:options="options">
+      Logo
+    </headway-widget>
+  </div>
+</template>
+
+<script>
+  import { HeadwayWidget } from "@headwayapp/vue-widget";
+
+  export default {
+    name: "App",
+    components: {
+      "headway-widget": HeadwayWidget,
+    },
+    data: () => ({
+      options: {
+        badgePosition: "top-left",
+        callbacks: {
+          onShowWidget: () => {
+            alert("Hello");
+          },
+        },
+      },
+    }),
+  };
+</script>
 ```
 
 ## Api reference
