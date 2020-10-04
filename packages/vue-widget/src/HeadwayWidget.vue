@@ -16,6 +16,15 @@ const HeadwayWidgetSelector = "." + HeadwayWidgetClassName;
 const HeadwayWidgetTriggerClassName = "HW_trigger";
 const HeadwayWidgetTriggerSelector = "." + HeadwayWidgetTriggerClassName;
 
+const parsePosition = (positionText) => {
+  if (positionText.indexOf("-") === -1) {
+    return {};
+  }
+
+  const [y, x] = positionText.split("-");
+  return { x, y };
+};
+
 export default {
   name: "headway-widget",
   props: {
@@ -38,6 +47,10 @@ export default {
       type: String,
       default: "div",
     },
+    position: {
+      type: String,
+      default: "bottom-right"
+    },
     badgePosition: {
       type: String,
       default: "bottom-right",
@@ -55,7 +68,14 @@ export default {
     cName: HeadwayWidgetClassName  + `_${self.id}`,
   }),
   methods: {
+    invokeCallbackIfExists(name) {
+      if (this.options.callbacks && this.options.callbacks[name]) {
+        this.options.callbacks[name]();
+      }
+    },
     initHeadway() {
+      const objPosition = parsePosition(this.position);
+
       const hwConfig = {
         selector: HeadwayWidgetSelector + `_${this.id}`,
         account: this.account,
@@ -65,21 +85,48 @@ export default {
         callbacks: {
           onWidgetReady: () => {
             /**
-             * Success event.
+             * widgetReady event.
              */
             this.$emit("widgetReady");
+            this.invokeCallbackIfExists('onWidgetReady');
           },
-          onShowWidget: () => this.$emit("showWidget"),
-          onShowDetails: () => this.$emit("showDetails"),
-          onReadMore: () => this.$emit("readMore"),
-          onHideWidget: () => this.$emit("hideWidget"),
+          onShowWidget: () => {
+            /**
+             * showWidget event.
+             */
+            this.$emit("showWidget");
+            this.invokeCallbackIfExists('onShowWidget');
+          },
+          onShowDetails: () => {
+            /**
+             * showDetails event.
+             */
+            this.$emit("showDetails");
+            this.invokeCallbackIfExists('onShowDetails');
+          },
+          onReadMore: () => {
+            /**
+             * readMore event.
+             */
+            this.$emit("readMore");
+            this.invokeCallbackIfExists('onReadMore');
+          },
+          onHideWidget: () => {
+            /**
+             * hideWidget event.
+             */
+            this.$emit("hideWidget");
+            this.invokeCallbackIfExists('onHideWidget');
+          },
         },
         krzysztof: true,
         translations: this.translations,
         badgePosition: this.badgePosition,
+        position: objPosition,
+        ...this.options
       };
-      const w = window.Headway.getNewWidget();
-      const x = w.init(hwConfig);
+      const widget = window.Headway.getNewWidget();
+      widget.init(hwConfig);
     },
   },
   mounted() {
