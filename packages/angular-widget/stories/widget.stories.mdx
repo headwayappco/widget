@@ -9,7 +9,7 @@ import {
 import { moduleMetadata } from "@storybook/angular";
 import { number, select } from "@storybook/addon-knobs";
 //import Logo from './logo';
-import { Headway, HeadwayWidget } from "../src/index";
+import { Headway, HeadwayWidget, HeadwayWidgetTrigger } from "../src/index";
 import { text, withKnobs } from "@storybook/addon-knobs";
 import { Logo } from "./Logo.ts";
 
@@ -17,9 +17,28 @@ import { Logo } from "./Logo.ts";
   title="HeadwayWidget"
   decorators={[
     withKnobs,
-    moduleMetadata({ declarations: [HeadwayWidget, Logo] }),
+    moduleMetadata({
+      declarations: [HeadwayWidget, HeadwayWidgetTrigger, Logo],
+    }),
   ]}
 />
+
+# Getting started
+
+```js
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { AppComponent } from "./app.component";
+import { Headway } from "@headwayapp/angular-widget";
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, Headway],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
 
 # HeadwayWidget
 
@@ -37,8 +56,16 @@ The simplest possible usage, just set your _account_ id.
   </Story>
 </Preview>
 
-```html
-<headway-widget account="J1LKG7"><logo></logo></headway-widget>
+```js
+@Component({
+  selector: "my-app",
+  template: `
+    <div>
+      <headway-widget account="J1LKG7">Logo</headway-widget>
+    </div>
+  `,
+})
+class AppComponent {}
 ```
 
 ## Badge position
@@ -55,10 +82,21 @@ You can change badge position to one of 9 possible values. Check all of them in 
   </Story>
 </Preview>
 
-```html
-<headway-widget account="J1LKG7" id="widget-badge" badgePosition="center-left">
-  <logo></logo>
-</headway-widget>
+```js
+@Component({
+  selector: "my-app",
+  template: `
+    <div>
+      <headway-widget
+        account="J1LKG7"
+        id="widget-badge"
+        badgePosition="center-left"
+        >Logo</headway-widget
+      >
+    </div>
+  `,
+})
+class AppComponent {}
 ```
 
 ## Widget position
@@ -75,10 +113,18 @@ You can change widget position to one of 6 possible values. Check all of them in
   </Story>
 </Preview>
 
-```html
-<headway-widget account="J1LKG7" id="widget-badge" position="bottom-right">
-  <logo></logo>
-</headway-widget>
+```js
+@Component({
+  selector: "my-app",
+  template: `
+    <div>
+      <headway-widget account="J1LKG7" id="widget-badge" position="bottom-right"
+        >Logo</headway-widget
+      >
+    </div>
+  `,
+})
+class AppComponent {}
 ```
 
 ## External trigger
@@ -86,7 +132,38 @@ You can change widget position to one of 6 possible values. Check all of them in
 Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `forId`
 prop to corresponding widget `id`.
 
-XXX
+<Preview withSource="none">
+  <Story name="External trigger">
+    {{
+      template: `<div style="display: flex">
+      <headway-widget account="J1LKG7" id="idOfYourChoice">
+        <logo></logo>
+      </headway-widget>
+      <headway-widget-trigger forId="idOfYourChoice">
+        <button>Trigger</button>
+      </headway-widget-trigger>
+    </div>`,
+      props: () => ({}),
+    }}
+  </Story>
+</Preview>
+
+```js
+@Component({
+  selector: "my-app",
+  template: `
+    <div style="display: flex">
+      <headway-widget account="J1LKG7" id="idOfYourChoice">
+        Logo
+      </headway-widget>
+      <headway-widget-trigger forId="idOfYourChoice">
+        <button>Trigger</button>
+      </headway-widget-trigger>
+    </div>
+  `,
+})
+class AppComponent {}
+```
 
 ## Callbacks
 
@@ -150,7 +227,7 @@ You can translate widget labels.
 
 ```typescript
 @Component({
-  selector: "app",
+  selector: "my-app",
   template: `<headway-widget
     account="J1LKG7"
     id="widget-translations"

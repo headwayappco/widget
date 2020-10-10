@@ -8,6 +8,10 @@ import {
   OnDestroy,
 } from "@angular/core";
 
+interface WidgetOptions {
+  trigger?: string;
+}
+
 const HeadwayWidgetClassName = "HW_widget_component";
 const HeadwayWidgetSelector = "." + HeadwayWidgetClassName;
 const HeadwayWidgetTriggerClassName = "HW_trigger";
@@ -32,8 +36,9 @@ const parsePosition = (positionText) => {
   </div>`,
 })
 export class HeadwayWidget implements OnInit, OnDestroy {
-  @Input() name: string;
+  @Input() id = "widget-1";
   @Input() account: string;
+  @Input() trigger: boolean = false;
   @Input() badgePosition = "bottom-right";
   @Input() position = "bottom-right";
   @Input() translations = {};
@@ -42,13 +47,16 @@ export class HeadwayWidget implements OnInit, OnDestroy {
   @Output() showDetails = new EventEmitter<boolean>();
   @Output() readMore = new EventEmitter<boolean>();
   @Output() hideWidget = new EventEmitter<boolean>();
+  @Output() options: WidgetOptions = {};
   headwayWidgetClassName = HeadwayWidgetClassName;
 
   initHeadway() {
     const hwConfig = {
       selector: HeadwayWidgetSelector,
       account: this.account,
-      trigger: HeadwayWidgetSelector,
+      trigger: this.trigger
+        ? HeadwayWidgetSelector + `_${this.id}`
+        : this.options.trigger || HeadwayWidgetTriggerSelector + `_${this.id}`,
       callbacks: {
         onWidgetReady: () => this.widgetReady.emit(),
         onShowWidget: () => this.showWidget.emit(),
@@ -62,7 +70,6 @@ export class HeadwayWidget implements OnInit, OnDestroy {
       translations: this.translations,
     };
     (this as any).widget = (window as any).Headway.getNewWidget();
-
     (this as any).widget.init(hwConfig);
   }
 
@@ -86,9 +93,23 @@ export class HeadwayWidget implements OnInit, OnDestroy {
   }
 }
 
+@Component({
+  selector: "headway-widget-trigger",
+  template: `<div
+    class="{{ headwayWidgetTriggerClassName + '_' + forId }}"
+    style="position: relative; display: inline-block"
+  >
+    <ng-content></ng-content>
+  </div>`,
+})
+export class HeadwayWidgetTrigger {
+  @Input() forId = "widget-1";
+  headwayWidgetTriggerClassName = HeadwayWidgetTriggerClassName;
+}
+
 @NgModule({
   imports: [],
-  exports: [HeadwayWidget],
-  declarations: [HeadwayWidget],
+  exports: [HeadwayWidget, HeadwayWidgetTrigger],
+  declarations: [HeadwayWidget, HeadwayWidgetTrigger],
 })
 export class Headway {}
