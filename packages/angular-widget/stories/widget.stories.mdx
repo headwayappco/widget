@@ -186,18 +186,26 @@ logged names.
   </Story>
 </Preview>
 
-```html
-<headway-widget
-  account="J1LKG7"
-  id="widget-handlers"
-  (widgetReady)="log('Widget is ready')"
-  (showWidget)="log('Widget shown')"
-  (readMore)="log('Read more clicked')"
-  (showDetails)="log('Show more clicked')"
-  (hideWidget)="log('Widget hidden')"
->
-  <logo></logo>
-</headway-widget>
+```typescript
+@Component({
+  selector: "my-app",
+  template: `<headway-widget
+    account="J1LKG7"
+    id="widget-handlers"
+    (widgetReady)="log('Widget is ready')"
+    (showWidget)="log('Widget shown')"
+    (readMore)="log('Read more clicked')"
+    (showDetails)="log('Show more clicked')"
+    (hideWidget)="log('Widget hidden')"
+  >
+    <logo></logo>
+  </headway-widget>`,
+})
+class AppComponent {
+  log(message) {
+    console.log(message);
+  }
+}
 ```
 
 ## Translations
@@ -246,6 +254,52 @@ export class AppComponent {
       improvement: "mejora",
     },
     footer: "Lee mas 👉",
+  };
+}
+```
+
+## Options
+
+You can pass options in a classic way.
+
+<Preview withSource="none">
+  <Story name="Options">
+    {{
+      template: `<headway-widget account="J1LKG7" id="widget-options"
+      [options]="options"><logo></logo></headway-widget>`,
+      props: {
+        options: {
+          badgePosition: "top-left",
+          callbacks: {
+            onShowWidget: () => {
+              alert("Hello");
+            },
+          },
+        },
+      },
+    }}
+  </Story>
+</Preview>
+
+```typescript
+@Component({
+  selector: "my-app",
+  template: `<headway-widget
+    account="J1LKG7"
+    id="widget-options"
+    [options]="options"
+  >
+    Logo
+  </headway-widget>`,
+})
+export class AppComponent {
+  options = {
+    badgePosition: "top-left",
+    callbacks: {
+      onShowWidget: () => {
+        alert("Hello");
+      },
+    },
   };
 }
 ```

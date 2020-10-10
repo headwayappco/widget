@@ -36,18 +36,18 @@ const parsePosition = (positionText) => {
   </div>`,
 })
 export class HeadwayWidget implements OnInit, OnDestroy {
-  @Input() id = "widget-1";
+  @Input() id: string = "widget-1";
   @Input() account: string;
   @Input() trigger: boolean = false;
-  @Input() badgePosition = "bottom-right";
-  @Input() position = "bottom-right";
+  @Input() badgePosition: string = "bottom-right";
+  @Input() position: string = "bottom-right";
   @Input() translations = {};
+  @Input() options: WidgetOptions = {};
   @Output() widgetReady = new EventEmitter<boolean>();
   @Output() showWidget = new EventEmitter<boolean>();
   @Output() showDetails = new EventEmitter<boolean>();
   @Output() readMore = new EventEmitter<boolean>();
   @Output() hideWidget = new EventEmitter<boolean>();
-  @Output() options: WidgetOptions = {};
   headwayWidgetClassName = HeadwayWidgetClassName;
 
   initHeadway() {
@@ -68,6 +68,7 @@ export class HeadwayWidget implements OnInit, OnDestroy {
       badgePosition: this.badgePosition,
       position: parsePosition(this.position),
       translations: this.translations,
+      ...this.options
     };
     (this as any).widget = (window as any).Headway.getNewWidget();
     (this as any).widget.init(hwConfig);
@@ -103,7 +104,7 @@ export class HeadwayWidget implements OnInit, OnDestroy {
   </div>`,
 })
 export class HeadwayWidgetTrigger {
-  @Input() forId = "widget-1";
+  @Input() forId: string = "widget-1";
   headwayWidgetTriggerClassName = HeadwayWidgetTriggerClassName;
 }
 
