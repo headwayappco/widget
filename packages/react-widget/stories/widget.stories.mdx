@@ -94,7 +94,7 @@ Widget can be triggered by its children.
 
 ## External trigger
 
-Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `forId`
+Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `widgetId`
 prop to corresponding widget `id`.
 
 <Preview withSource="none">
@@ -103,7 +103,7 @@ prop to corresponding widget `id`.
       <HeadwayWidget account="J1LKG7" id="widget-external-trigger">
         <Logo />
       </HeadwayWidget>
-      <HeadwayWidgetTrigger forId="widget-external-trigger">
+      <HeadwayWidgetTrigger widgetId="widget-external-trigger">
         <button>Trigger</button>
       </HeadwayWidgetTrigger>
     </div>
@@ -115,7 +115,7 @@ prop to corresponding widget `id`.
   <HeadwayWidget account="J1LKG7" id="widget-external-trigger">
     <Logo />
   </HeadwayWidget>
-  <HeadwayWidgetTrigger forId="widget-external-trigger">
+  <HeadwayWidgetTrigger widgetId="widget-external-trigger">
     <button>Trigger</button>
   </HeadwayWidgetTrigger>
 </div>

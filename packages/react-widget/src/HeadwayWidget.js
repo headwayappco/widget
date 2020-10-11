@@ -6,15 +6,15 @@ const HeadwayWidgetSelector = "." + HeadwayWidgetClassName;
 const HeadwayWidgetTriggerClassName = "HW_trigger";
 const HeadwayWidgetTriggerSelector = "." + HeadwayWidgetTriggerClassName;
 
-const HeadwayWidgetTrigger = ({ forId, component, children }) => {
+const HeadwayWidgetTrigger = ({ widgetId, component, children }) => {
   const Component = component || "div";
-  const className = HeadwayWidgetTriggerClassName + `_${forId}`;
+  const className = HeadwayWidgetTriggerClassName + `_${widgetId}`;
 
   return <Component className={className}>{children}</Component>;
 };
 
 HeadwayWidgetTrigger.defaultProps = {
-  forId: "widget-1",
+  widgetId: "widget-1",
 };
 
 const parsePosition = (positionText) => {

@@ -7,7 +7,6 @@
     "build": "rollup -c",
     "dev": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "pack:rename": "(cd output/ && mv \"$(npm pack ../ | tail -n 1)\" package.tgz)"
   },
   "files": [
     "dist/*"

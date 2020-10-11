@@ -97,14 +97,14 @@ export class HeadwayWidget implements OnInit, OnDestroy {
 @Component({
   selector: "headway-widget-trigger",
   template: `<div
-    class="{{ headwayWidgetTriggerClassName + '_' + forId }}"
+    class="{{ headwayWidgetTriggerClassName + '_' + widgetId }}"
     style="position: relative; display: inline-block"
   >
     <ng-content></ng-content>
   </div>`,
 })
 export class HeadwayWidgetTrigger {
-  @Input() forId: string = "widget-1";
+  @Input() widgetId: string = "widget-1";
   headwayWidgetTriggerClassName = HeadwayWidgetTriggerClassName;
 }
 

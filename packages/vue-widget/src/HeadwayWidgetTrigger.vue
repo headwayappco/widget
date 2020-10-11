@@ -18,7 +18,7 @@ const HeadwayWidgetTriggerSelector = "." + HeadwayWidgetTriggerClassName;
 export default {
   name: "headway-widget-trigger",
   props: {
-    forId: {
+    widgetId: {
       type: String,
       default: 'widget-1'
     },
@@ -28,7 +28,7 @@ export default {
     },
   },
   data: (self) => ({
-    cName: HeadwayWidgetTriggerClassName  + `_${self.forId}`,
+    cName: HeadwayWidgetTriggerClassName  + `_${self.widgetId}`,
   }),
 };
 </script>

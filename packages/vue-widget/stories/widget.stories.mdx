@@ -119,7 +119,7 @@ You can change widget position to one of 6 possible values. Check all of them in
 
 ## External trigger
 
-Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `forId`
+Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `widgetId`
 prop to corresponding widget `id`.
 
 <Preview withSource="none">
@@ -129,7 +129,7 @@ prop to corresponding widget `id`.
             <headway-widget account="J1LKG7" id="4">
                 <logo></logo>
             </headway-widget>
-            <headway-widget-trigger forId="4">
+            <headway-widget-trigger widgetId="4">
                 <button>Trigger</button>
             </headway-widget-trigger>
         </div>`,
@@ -143,7 +143,7 @@ prop to corresponding widget `id`.
     <headway-widget account="J1LKG7" position="center-left" id="idOfYourChoice"
       >Logo</headway-widget
     >
-    <headway-widget-trigger forId="idOfYourChoice">
+    <headway-widget-trigger widgetId="idOfYourChoice">
       <button>Trigger</button>
     </headway-widget-trigger>
   </div>

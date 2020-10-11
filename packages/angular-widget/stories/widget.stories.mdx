@@ -129,7 +129,7 @@ class AppComponent {}
 
 ## External trigger
 
-Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `forId`
+Widget can be triggered by any other element on the page. To achieve that use HeadwayWidgetTrigger and set its `widgetId`
 prop to corresponding widget `id`.
 
 <Preview withSource="none">
@@ -139,7 +139,7 @@ prop to corresponding widget `id`.
       <headway-widget account="J1LKG7" id="idOfYourChoice">
         <logo></logo>
       </headway-widget>
-      <headway-widget-trigger forId="idOfYourChoice">
+      <headway-widget-trigger widgetId="idOfYourChoice">
         <button>Trigger</button>
       </headway-widget-trigger>
     </div>`,
@@ -156,7 +156,7 @@ prop to corresponding widget `id`.
       <headway-widget account="J1LKG7" id="idOfYourChoice">
         Logo
       </headway-widget>
-      <headway-widget-trigger forId="idOfYourChoice">
+      <headway-widget-trigger widgetId="idOfYourChoice">
         <button>Trigger</button>
       </headway-widget-trigger>
     </div>
