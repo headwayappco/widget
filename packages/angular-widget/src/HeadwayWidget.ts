@@ -17,15 +17,6 @@ const HeadwayWidgetSelector = "." + HeadwayWidgetClassName;
 const HeadwayWidgetTriggerClassName = "HW_trigger";
 const HeadwayWidgetTriggerSelector = "." + HeadwayWidgetTriggerClassName;
 
-const parsePosition = (positionText) => {
-  if (positionText.indexOf("-") === -1) {
-    return {};
-  }
-
-  const [y, x] = positionText.split("-");
-  return { x, y };
-};
-
 @Component({
   selector: "headway-widget",
   template: `<div
@@ -40,7 +31,7 @@ export class HeadwayWidget implements OnInit, OnDestroy {
   @Input() account: string;
   @Input() trigger: boolean = false;
   @Input() badgePosition: string = "bottom-right";
-  @Input() position: string = "bottom-right";
+  @Input() widgetPosition: string = "bottom-right";
   @Input() translations = {};
   @Input() options: WidgetOptions = {};
   @Output() widgetReady = new EventEmitter<boolean>();
@@ -58,15 +49,15 @@ export class HeadwayWidget implements OnInit, OnDestroy {
         ? HeadwayWidgetSelector + `_${this.id}`
         : this.options.trigger || HeadwayWidgetTriggerSelector + `_${this.id}`,
       callbacks: {
-        onWidgetReady: () => this.widgetReady.emit(),
+        onWidgetReady: (widget) => this.widgetReady.emit(widget),
         onShowWidget: () => this.showWidget.emit(),
-        onShowDetails: () => this.showDetails.emit(),
-        onReadMore: () => this.readMore.emit(),
+        onShowDetails: (changelog) => this.showDetails.emit(changelog),
+        onReadMore: (changelog) => this.readMore.emit(changelog),
         onHideWidget: () => this.hideWidget.emit(),
       },
-      krzysztof: true,
+      __component: true,
       badgePosition: this.badgePosition,
-      position: parsePosition(this.position),
+      widgetPosition: this.widgetPosition,
       translations: this.translations,
       ...this.options
     };
@@ -88,7 +79,8 @@ export class HeadwayWidget implements OnInit, OnDestroy {
       script.onload = () => {
         this.initHeadway();
       };
-      script.src = "https://cdn.headwayapp.co/widget.js";
+      //script.src = "https://cdn.headwayapp.co/widget.js";
+      script.src = "https://cdn.headwaystaging.com/widget.js";
       head.appendChild(script);
     }
   }

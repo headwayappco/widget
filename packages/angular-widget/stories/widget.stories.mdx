@@ -107,7 +107,7 @@ You can change widget position to one of 6 possible values. Check all of them in
   <Story name="Widget Position">
     {{
       template: `<headway-widget account="J1LKG7" id="widget-badge"
-      position="bottom-left"><logo></logo></headway-widget>`,
+      widgetPosition="bottom-left"><logo></logo></headway-widget>`,
       props: () => ({}),
     }}
   </Story>
@@ -118,7 +118,10 @@ You can change widget position to one of 6 possible values. Check all of them in
   selector: "my-app",
   template: `
     <div>
-      <headway-widget account="J1LKG7" id="widget-badge" position="bottom-right"
+      <headway-widget
+        account="J1LKG7"
+        id="widget-badge"
+        widgetPosition="bottom-left"
         >Logo</headway-widget
       >
     </div>
@@ -174,10 +177,10 @@ logged names.
   <Story name="Callbacks">
     {{
       template: `<headway-widget account="J1LKG7" id="widget-badge"
-      (widgetReady)="log('Widget is ready')"
+      (widgetReady)="log('Widget is ready', $event)"
       (showWidget)="log('Widget shown')"
-      (readMore)="log('Read more clicked')"
-      (showDetails)="log('Show more clicked')"
+      (readMore)="log('Read more clicked', $event)"
+      (showDetails)="log('Show more clicked', $event)"
       (hideWidget)="log('Widget hidden')" ><logo></logo></headway-widget>`,
       props: {
         log: console.log,
@@ -192,10 +195,10 @@ logged names.
   template: `<headway-widget
     account="J1LKG7"
     id="widget-handlers"
-    (widgetReady)="log('Widget is ready')"
+    (widgetReady)="log('Widget is ready', $event)"
     (showWidget)="log('Widget shown')"
-    (readMore)="log('Read more clicked')"
-    (showDetails)="log('Show more clicked')"
+    (readMore)="log('Read more clicked', $event)"
+    (showDetails)="log('Show more clicked', $event)"
     (hideWidget)="log('Widget hidden')"
   >
     <logo></logo>
