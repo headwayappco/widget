@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useMemo } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 const HeadwayWidgetClassName = "HW_widget_component";
@@ -17,20 +17,11 @@ HeadwayWidgetTrigger.defaultProps = {
   widgetId: "widget-1",
 };
 
-const parsePosition = (positionText) => {
-  if (positionText.indexOf("-") === -1) {
-    return {};
-  }
-
-  const [y, x] = positionText.split("-");
-  return { x, y };
-};
-
 const HeadwayWidget = ({
   id,
   account,
   children,
-  position,
+  widgetPosition,
   badgePosition,
   component,
   trigger,
@@ -85,7 +76,6 @@ const HeadwayWidget = ({
     []
   );
 
-  const objPosition = useMemo(() => parsePosition(position), [position]);
 
   const initHeadway = useCallback(() => {
     const hwConfig = {
@@ -102,9 +92,9 @@ const HeadwayWidget = ({
         onHideWidget: handleHideWidget,
       },
       translations,
-      position: objPosition,
+      widgetPosition,
       badgePosition,
-      krzysztof: true,
+      __component: true,
       styles,
       ...options,
     };
@@ -124,7 +114,7 @@ const HeadwayWidget = ({
     handleReadMore,
     handleHideWidget,
     badgePosition,
-    position,
+    widgetPosition,
     translations,
   ]);
 
@@ -193,7 +183,7 @@ HeadwayWidget.propTypes = {
   /**
    * badge relative widget position
    */
-  position: PropTypes.oneOf([
+  widgetPosition: PropTypes.oneOf([
     "top-left",
     "top-right",
     "center-left",
@@ -263,7 +253,7 @@ HeadwayWidget.defaultProps = {
   account: "",
   id: "widget-1",
   badgePosition: "bottom-right",
-  position: "bottom-right",
+  widgetPosition: "bottom-right",
   styles: {},
   translations: {},
   options: {},
