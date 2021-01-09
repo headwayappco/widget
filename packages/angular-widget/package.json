@@ -1,6 +1,6 @@
 {
   "name": "@headwayapp/angular-widget",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,12 @@
     "build": "ng-packagr -p package.json",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "dev": "npm run docs:json && start-storybook"
+  },
+  "homepage": "https://headwayapp.co",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/headwayappco/widget.git",
+    "directory": "packages/angular-widget"
   },
   "ngPackage": {
     "lib": {
